@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import Gallery from './components/Gallery'
 import SearchBar from './components/SearchBar'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import AlbumView from './components/AlbumView'
+import ArtistView from './components/ArtistView'
+
 
 
 const App = () => {
@@ -32,12 +36,25 @@ const App = () => {
     }
 
     return (
-        <div>
-            <SearchBar handleSearch={handleSearch} />
-            {message}
-            <Gallery data={data} />
-        </div>
+        <>
+        {message}
+            <Router>
+                <Routes>
+                    <Route path="/" element={
+                        //fragment is used to wrap more than one component
+                        <>
+                            <SearchBar handleSearch = {handleSearch}/>
+                            <Gallery data={data} />
+                        </>
+                            
+                    } />
+                    <Route path="/album/:id" element={<AlbumView />} />
+                    <Route path="/artist/:id" element={<ArtistView />} />
+                </Routes>
+            </Router>
+        </>
     )
+    
 }
 
 export default App
