@@ -17,7 +17,7 @@ const App = () => {
         // Fetch data from API
         const fetchData = async () => {
             document.title = `${term} music`
-            const response = await fetch(API_URL + search)
+            const response = await fetch(API_URL + term)
             const resData = await response.json()
             if (resData.results.length > 0) {
                 return setData(resData.results)
